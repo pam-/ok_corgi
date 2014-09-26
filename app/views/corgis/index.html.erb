@@ -2,7 +2,14 @@
   <div class="corgi-container" id="misses">
     <h2>Thanks, but No Thanks</h2>
     <ul>
-
+    <% @corgis.each do |corgi| %>
+      <% if !corgi.match && corgi.match != nil %>
+      <li class='corgi'>
+        <h4> <%= corgi.name %> </h4>
+        <img src="<%= corgi.profile_img %>" class="pic"/>
+      </li>
+      <% end %>
+    <% end %>
     </ul>
   </div>
 
@@ -11,7 +18,7 @@
     <ul>
 
       <% @corgis.each_with_index do |corgi, i| %>
-        <li class="corgi <%= (i == 0) ? 'active' : 'hidden' %>">
+        <li class="corgi <%= (i == 0) ? 'active' : 'hidden' %>" id="<%= corgi.id %>">
           <h3><%= corgi.name %></h3>
           <%= image_tag corgi.profile_img, :class => "pic" %>
           <p class="bio"><%= corgi.bio %></p>
@@ -28,7 +35,14 @@
   <div class="corgi-container" id="matches">
     <h2>Matches!</h2>
     <ul>
-
+      <% @corgis.each do |corgi| %>
+        <% if corgi.match %>
+          <li class='corgi'>
+            <h4> <%= corgi.name %> </h4>
+            <img src="<%= corgi.profile_img %>" class="pic"/>
+          </li>
+        <% end %>
+      <% end %> 
     </ul>
   </div>
 </div>
