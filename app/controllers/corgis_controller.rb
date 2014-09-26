@@ -19,6 +19,11 @@ class CorgisController < ApplicationController
 
   def new
     @corgi = Corgi.new
+    
+    respond_to do |format|
+      format.html 
+      format.json { render json: @corgi }
+    end 
   end
 
   def edit

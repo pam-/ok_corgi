@@ -60,14 +60,13 @@ var OkCorgiApp = function() {
   });
 
   //adding corgi
-  $('a.new_corgi').on('click', function(event){
+  $('[data-target]').on('click', function(event){
+    // console.log('here')
+    var elTarget = $(this).attr('data-target');
+    var target = $(elTarget);
+    target.load($(this).attr('href'));
+
     event.preventDefault();
-
-    $.ajax({
-      type: 'GET',
-      url: '/corgis/new',
-
-    })
   })
 }
 

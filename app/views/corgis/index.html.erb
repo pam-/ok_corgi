@@ -46,6 +46,7 @@
     </ul>
   </div>
 </div>
-<div>
-  <%= link_to 'New Corgi', new_corgi_path, class: 'new_corgi' %>
+<div id="new-form">
 </div>
+
+  <%= link_to 'New Corgi', new_corgi_path, 'data-target' => '#new-form' %>
