@@ -33,36 +33,42 @@ var OkCorgiApp = function() {
     var corgi = $('li.corgi.active');
     var corgiId = corgi.attr('id');
     var status = "";
-    // var data = { name: $('h3', corgi).text(), bio: $('.bio', corgi).text(), profile_img: $('img', corgi).attr('src'),
-    //       match: status }
+    var data = { name: $('h3', corgi).text(), bio: $('.bio', corgi).text(), profile_img: $('img', corgi).attr('src'), match: status }
 
     if (elId === "paw-left") {
       containerSelector = "#misses";
-      // status = true;
+      status = false;
       $.ajax({
         type: 'PUT',
         url: '/corgis/'+ corgiId,
-        // contentType: 'text/plain',
-        data: { corgi: { name: $('h3', corgi).text(), bio: $('.bio', corgi).text(), profile_img: $('img', corgi).attr('src'),
-          match: false } },
+        data: { corgi: data},
         success: $('ul', containerSelector).append(createCorgiThumbnail())
       })
     }
     else {
       containerSelector = "#matches";
-      status = false;
+      status = true;
       $.ajax({
         type: 'PUT',
         url: '/corgis/'+ corgiId,
-        // contentType: 'text/plain',
-        data: { corgi: { name: $('h3', corgi).text(), bio: $('.bio', corgi).text(), profile_img: $('img', corgi).attr('src'),
-          match: true } },
+        data: { corgi: data },
         success: $('ul', containerSelector).append(createCorgiThumbnail())
       })
     }
     
     showNextCorgi();
   });
+
+  //adding corgi
+  $('a.new_corgi').on('click', function(event){
+    event.preventDefault();
+
+    $.ajax({
+      type: 'GET',
+      url: '/corgis/new',
+
+    })
+  })
 }
 
 

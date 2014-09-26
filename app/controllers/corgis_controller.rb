@@ -17,17 +17,13 @@ class CorgisController < ApplicationController
     end 
   end
 
-  # GET /corgis/new
   def new
     @corgi = Corgi.new
   end
 
-  # GET /corgis/1/edit
   def edit
   end
 
-  # POST /corgis
-  # POST /corgis.json
   def create
     @corgi = Corgi.new(corgi_params)
 
@@ -36,7 +32,6 @@ class CorgisController < ApplicationController
         format.html { redirect_to @corgi }
         format.json { render json: @corgi }
       end 
-      # redirect_to @corgi, notice: 'Corgi was successfully created.'
     else
       respond_to do |format|
         format.html
@@ -45,8 +40,6 @@ class CorgisController < ApplicationController
     end
   end
 
-  # PATCH/PUT /corgis/1
-  # PATCH/PUT /corgis/1.json
   def update
     @corgi = Corgi.find(params[:id])
     if @corgi.update(corgi_params)
@@ -61,23 +54,24 @@ class CorgisController < ApplicationController
     end
   end
 
-  # DELETE /corgis/1
-  # DELETE /corgis/1.json
+
   def destroy
     @corgi = Corgi.find(params[:id])
     @corgi.destroy
 
-    redirect_to corgis_url, notice: 'Corgi was successfully destroyed.'
+    respond_to do |format|
+      format.html { redirect_to corgis_path }
+      format.json { render json: {} }
+    end 
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_corgi
       @corgi = Corgi.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def corgi_params
-      params.require(:corgi).permit(:name, :bio, :profile_img, :match)
+      params.require(:corgi).permit(:name, :bio, :profile_img)
     end
 end
